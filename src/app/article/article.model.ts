@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { compose } from "ramda";
 
 export class Articles {
     title: string;
@@ -51,10 +52,13 @@ export class ArticleService {
             new Articles("Amazon Homepage", 'https://amazon.com', 10)
         ];
     }
-    
+
     login(username: any) {
+        const date = new Date()
         this.username = username;
+        this.date = date
         localStorage.setItem("articleLoggedIn", username.toString());
+        localStorage.setItem("dateLoggedIn", date.toString());
         console.log('current user:', this.username);
         this.date = new Date
     }
@@ -63,15 +67,20 @@ export class ArticleService {
         return localStorage.getItem("articleLoggedIn")
     }
 
+    getLoggedInDate() {
+        return localStorage.getItem("dateLoggedIn")
+    }
+
     logout() {
         localStorage.removeItem("articleLoggedIn")
+        localStorage.removeItem("dateLoggedIn")
     }
 }
 export const oneSec = () => 1000;
 
 // Function to get the current time in 12-hour format
-export const getCurrentTime = (time: Date) => {
-    const date = time;
+export const getCurrentTime = () => {
+    const date = new Date;
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
@@ -94,13 +103,13 @@ export const display = (target: any) => (time: any) => {
     target(time);
 };
 
-export const startCounting = (startDate: Date) => {
-    let currentTime = startDate;
-
-    setInterval(() => {
-        currentTime.setSeconds(currentTime.getSeconds() + 1);
-        const time = getCurrentTime(currentTime);
-        display(log)(time);
-    }, oneSec());
-};
+export const startCounting = () =>
+    setInterval(
+        compose(
+            clear,
+            getCurrentTime,
+            display(log)
+        ),
+        oneSec()
+    )
 

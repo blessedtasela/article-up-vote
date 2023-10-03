@@ -13,14 +13,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-
-  header = 'Berliz Article Voting Blog';
+  countdownIntervalId: any;
   articles: Articles[];
   loggedIn: boolean = false;
   username: string = '';
   hideUsername: boolean = false;
   currentTime: any;
   loggedOut: any;
+  loggedInDuration: string = '00h :00m :00s';
+  countdownInterval: any;
   constructor(private modalService: NgbModal,
     public articleService: ArticleService) {
     this.articles = articleService.articles
@@ -36,7 +37,7 @@ export class ArticleComponent implements OnInit {
     else {
       this.loggedIn = false
     }
-
+    this.startCountdown()
   }
 
   login(usernameInput: HTMLInputElement): boolean {
@@ -47,8 +48,6 @@ export class ArticleComponent implements OnInit {
     }
     this.username = this.articleService.username;
     usernameInput.value = ''
-    this.currentTime = new Date;
-    startCounting(this.currentTime);
     return false;
   }
 
@@ -85,4 +84,34 @@ export class ArticleComponent implements OnInit {
     this.articles = results
   }
 
+  ngOnDestroy() {
+    clearInterval(this.countdownInterval);
+  }
+
+  startCountdown() {
+    const loginTimeStr = this.articleService.getLoggedInDate();
+    if (loginTimeStr) {
+      const loginTime = new Date(loginTimeStr);
+      this.updateLoggedInDuration(loginTime);
+      this.countdownInterval = setInterval(() => {
+        this.updateLoggedInDuration(loginTime);
+      }, 1000); // Update every second
+    }
+  }
+
+  updateLoggedInDuration(loginTime: Date) {
+    const currentTime = new Date();
+    const elapsedTimeInSeconds = Math.floor(
+      (currentTime.getTime() - loginTime.getTime()) / 1000
+    );
+    const hours = Math.floor(elapsedTimeInSeconds / 3600);
+    const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
+    const seconds = elapsedTimeInSeconds % 60;
+    this.loggedInDuration = this.formatTime(hours, minutes, seconds);
+  }
+
+  formatTime(hours: number, minutes: number, seconds: number): string {
+    const pad = (n: number) => (n < 10 ? '0' + n : n.toString());
+    return pad(hours) + 'h: ' + pad(minutes) + 'm :' + pad(seconds) + 's';
+  }
 }
