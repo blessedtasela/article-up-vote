@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-primary fixed-top rounded-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home">
+        <h4 class="text-light font-weight-bold">Berliz Article Voting Blog</h4>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="font-size: 16px;"></span>
+      </button>      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-light font-weight-bold" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              LOG OUT
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" (click)="logout()">Yes</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item">No</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <label for="query"></label>
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="query" #query>
+          <button class="btn btn-outline-success text-light" type="submit" (click)="search(query.value)">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  

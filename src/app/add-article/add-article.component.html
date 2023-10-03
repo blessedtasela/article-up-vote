@@ -1,0 +1,21 @@
+<div class="container-fluid px-5">
+    <div class="row">
+      <div class="col">
+        <label for="newTitle" class="form-label">Enter Title</label>
+        <input type="text" class="form-control form-control-sm" id="newTitle" #newTitle>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <label for="newLink" class="form-label">Enter Link</label>
+        <input type="text" class="form-control form-control-sm" id="newLink" #newLink>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <button (click)="addArticle(newTitle, newLink)" type="button" class="btn btn-sm btn-outline-primary">Add Article</button>
+      </div>
+    </div>
+  </div>
+  
+ 

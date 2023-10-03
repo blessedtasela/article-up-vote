@@ -1,0 +1,57 @@
+<app-nav-bar (loggedOut)="loggedOut()" (searchEmit)="handleSearchResults($event)"></app-nav-bar>
+
+<!-- Login Form -->
+
+<div class="container p-5 mt-5">
+  <div>
+    <span (click)="toggleLoginVisibility()" class="toggle-icon" class="btn btn-link">
+      <i [class]="loggedIn ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+    </span>
+  </div>
+
+  <div *ngIf="!loggedIn && articleService.getCurrentUser() == null">
+    <div class="alert alert-success -mt-5">
+      <p class="mb-0">You are currently not logged in</p>
+      {{ currentTime }}
+    </div>
+  </div>
+
+  <div *ngIf="!loggedIn && articleService.getCurrentUser() == null">
+    <label for="username">Login:</label>
+    <input #usernameInput placeholder="username" required type="text" id="username" class="form-control mb-2">
+    <button (click)="login(usernameInput)" class="btn btn-primary">Login</button>
+  </div>
+
+  <div *ngIf="loggedIn && articleService.getCurrentUser() != null">
+    <div class="alert alert-success -mt-5">
+      <h4 class="alert-heading">Welcome <span class="text-primary">{{ articleService.getCurrentUser() }}</span></h4>
+      <p class="mb-0">You are now logged in!</p>
+      {{ currentTime }}
+    </div>
+  </div>
+
+  <div *ngIf="username !=null">
+    <div *ngIf="articles.length === 0" class="alert alert-warning">No article found</div>
+    <app-add-article (add)="addArticle($event.title, $event.link)"></app-add-article>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-12 col-lg-6" *ngFor="let article of sortedArticles()">
+          <div class="card shadow p-3 mb-5 bg-white rounded article-card min-h-30" >
+            <a class="text-decoration-none" href="{{ article.link }}">
+              <h3 class="card-title display-10 fw-bold">{{ article.title }}</h3>
+              <h5 class="card-subtitle text-muted font-italic">{{ article.domain() }}</h5>
+            </a>
+            <div class="d-flex align-items-center justify-content-md-end">
+              <button (click)="voteUp(article)" class="btn btn-link">
+                <i class="bi bi-hand-thumbs-up" style="font-size: 24px;"></i>
+              </button>
+              <button (click)="voteDown(article)" class="btn btn-link">
+                <i class="bi bi-hand-thumbs-down" style="font-size: 24px;"></i>
+              </button>
+              <h2 class="display-4 text-success mx-3">{{ article.votes }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

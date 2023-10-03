@@ -1,0 +1,83 @@
+.field-box-vote {
+    width: 400px;
+    background-color: #eeeeee;
+    padding: 10px;
+    margin: 5px;
+  }
+  .field-box-point {
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    background-color: #c7c2c2;
+  }
+  .title{
+    position: absolute;
+    right: 100px;
+    left: 250px;
+    width: 300px;
+    padding: 0px; 
+    margin: 10px 0 20px; 
+    color: black;
+  }
+  .title-link{
+    position: absolute;
+    right: 100px;
+    left: 250px;
+    width: 300px;
+    padding: 0px; 
+    margin: 10px 0 20px; 
+    color: rgb(3, 101, 149);
+  }
+  .article-1{
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    background-color: #eeeeee;
+  }
+  .vote-up{
+    position: absolute;
+    right: 200px;
+    left: 250px;
+    width: 300px;
+    padding: 0px; 
+    margin: 10px 0 20px; 
+    color: rgb(3, 101, 149);
+    font-style: italic;
+    padding: 10px;
+  }
+  .vote-down{
+    position: absolute;
+    right: 200px;
+    left:300px;
+    width: 300px;
+    padding: 0px; 
+    margin: 10px 0 20px; 
+    color: rgb(3, 101, 149);
+    font-style: italic;
+  }
+  .vote-point{
+   position: absolute;
+    right: 200px;
+    left:50px;
+    width: 300px;
+    padding: 0px; 
+    margin: 10px 0 20px; 
+    color: black;
+    text-align: center;
+
+  }
+  .vote-num{
+    position: absolute;
+     right: 200px;
+     left:50px;
+     width: 300px;
+     padding: 0px; 
+     margin: 10px 0 20px; 
+     color: black;
+     text-align: center;
+ 
+   }
+   .article-card {
+    max-height: 200px; /* Adjust the value as needed */
+  }
+  

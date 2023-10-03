@@ -1,0 +1,10 @@
+.navbar-nav .nav-link:hover {
+    background-color: #4d4b4b42; /* Change the hover background color */
+    color: #007bff; /* Change the hover text color */
+  }
+  
+  .navbar-nav .btn:hover {
+    background-color: #fff; /* Change the hover background color for the button */
+    color: #007bff; /* Change the hover text color for the button */
+  }
+  
