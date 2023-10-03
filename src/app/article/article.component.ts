@@ -43,7 +43,8 @@ export class ArticleComponent implements OnInit {
 
   login(usernameInput: HTMLInputElement): boolean {
     const username = usernameInput.value.trim();
-    this.articleService.login(username);
+    this.articleService.login(username, new Date);
+
     if (this.articleService.getCurrentUser != null) {
       this.loggedIn = true;
     }

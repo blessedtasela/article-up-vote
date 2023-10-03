@@ -53,14 +53,13 @@ export class ArticleService {
         ];
     }
 
-    login(username: any) {
-        const date = new Date()
+    login(username: any, date: Date) {
         this.username = username;
         this.date = date
         localStorage.setItem("articleLoggedIn", username.toString());
         localStorage.setItem("dateLoggedIn", date.toString());
         console.log('current user:', this.username);
-        this.date = new Date
+        console.log('date logged:', this.date);
     }
 
     getCurrentUser() {
