@@ -4,7 +4,7 @@ import {
   HostBinding,
   OnInit
 } from '@angular/core';
-import { ArticleService, Articles, startCounting } from './article.model';
+import { ArticleService, Articles, getCurrentTime } from './article.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -19,6 +19,7 @@ export class ArticleComponent implements OnInit {
   username: string = '';
   hideUsername: boolean = false;
   currentTime: any;
+  loggedTime: any;
   loggedOut: any;
   loggedInDuration: string = '00h :00m :00s';
   countdownInterval: any;
@@ -92,6 +93,7 @@ export class ArticleComponent implements OnInit {
     const loginTimeStr = this.articleService.getLoggedInDate();
     if (loginTimeStr) {
       const loginTime = new Date(loginTimeStr);
+      this.loggedTime = getCurrentTime(loginTime);
       this.updateLoggedInDuration(loginTime);
       this.countdownInterval = setInterval(() => {
         this.updateLoggedInDuration(loginTime);

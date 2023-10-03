@@ -79,8 +79,8 @@ export class ArticleService {
 export const oneSec = () => 1000;
 
 // Function to get the current time in 12-hour format
-export const getCurrentTime = () => {
-    const date = new Date;
+export const getCurrentTime = (time : Date) => {
+    const date = time
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
@@ -88,7 +88,7 @@ export const getCurrentTime = () => {
     const formattedHours = (hours % 12 || 12).toString().padStart(2, '0'); // Convert 0 to 12 for 12 AM
     const formattedMinutes = minutes.toString().padStart(2, '0');
     const formattedSeconds = seconds.toString().padStart(2, '0');
-    return {
+    return  {
         hours: formattedHours,
         minutes: formattedMinutes,
         seconds: formattedSeconds,
@@ -103,13 +103,13 @@ export const display = (target: any) => (time: any) => {
     target(time);
 };
 
-export const startCounting = () =>
-    setInterval(
-        compose(
-            clear,
-            getCurrentTime,
-            display(log)
-        ),
-        oneSec()
-    )
+// export const startCounting = () =>
+//     setInterval(
+//         compose(
+//             clear,
+//             getCurrentTime,
+//             display(log)
+//         ),
+//         oneSec()
+//     )
 

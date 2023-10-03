@@ -22,10 +22,16 @@
 
   <div *ngIf="loggedIn && articleService.getCurrentUser() != null">
     <div class="alert alert-success -mt-5">
-      <h4 class="alert-heading">Welcome <span class="text-primary">{{ articleService.getCurrentUser() }}</span></h4>
-      <p class="mb-0">You are now logged in!</p>
-      <p class="mb-0">You are now logged in for {{ loggedInDuration }} seconds!</p>
+      <h4 class="alert-heading">Welcome <span class="text-primary">{{articleService.getCurrentUser() }}</span></h4>
+      <p class="mb-0">You are currently logged in at
+        <span class="text-primary font-italic font-weight-bold">
+            {{ [loggedTime.hours + ":" + loggedTime.minutes + ":" + loggedTime.seconds, loggedTime.ampm].join(' ') }}
+        </span>
+        for <span class="text-success font-weight-bold">{{ loggedInDuration }}</span>
+    </p>
+    
     </div>
+
   </div>
 
   <div *ngIf="username !=null">
@@ -34,7 +40,7 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-12 col-lg-6" *ngFor="let article of sortedArticles()">
-          <div class="card shadow p-3 mb-5 bg-white rounded article-card min-h-30" >
+          <div class="card shadow p-3 mb-5 bg-white rounded article-card min-h-30">
             <a class="text-decoration-none" href="{{ article.link }}">
               <h3 class="card-title display-10 fw-bold">{{ article.title }}</h3>
               <h5 class="card-subtitle text-muted font-italic">{{ article.domain() }}</h5>
